@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+    <h1>Admin Panel</h1>
+    <a href="{{ url_for('add_question') }}" class="button">Add New Question</a>
+    <h2>Existing Topics</h2>
+    <ul>
+        {% for topic in topics %}
+            <li>
+                {{ topic.name }}
+                <a href="{{ url_for('rename_topic', topic_id=topic.id) }}" class="button">Rename Topic</a>
+                <a href="{{ url_for('delete_topic', topic_id=topic.id) }}" class="button" onclick="return confirm('Are you sure you want to delete this topic?')">Delete Topic</a>
+                <ul>
+                    {% for question in topic.questions %}
+                        <li>
+                            {{ question.question_text }}
+                            <a href="{{ url_for('delete_question', question_id=question.id) }}" class="button" onclick="return confirm('Are you sure you want to delete this question?')">Delete Question</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}" class="button">Go Home</a>
+{% endblock %}

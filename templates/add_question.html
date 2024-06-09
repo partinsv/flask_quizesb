@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Add Question{% endblock %}
+
+{% block content %}
+    <h1>Add New Question</h1>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('add_question') }}" method="post">
+        <label for="topic">Topic:</label>
+        <select id="topic" name="topic" required onchange="toggleNewTopicInput()">
+            {% for topic in topics %}
+                <option value="{{ topic.name }}">{{ topic.name }}</option>
+            {% endfor %}
+            <option value="new">New Topic</option>
+        </select><br><br>
+        
+        <div id="new_topic_input" style="display:none;">
+            <label for="new_topic">New Topic Name:</label>
+            <input type="text" id="new_topic" name="new_topic"><br><br>
+        </div>
+        
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question" required><br><br>
+        
+        <label for="choice1">Choice 1:</label>
+        <input type="text" id="choice1" name="choice1" required><br><br>
+        
+        <label for="choice2">Choice 2:</label>
+        <input type="text" id="choice2" name="choice2" required><br><br>
+        
+        <label for="choice3">Choice 3:</label>
+        <input type="text" id="choice3" name="choice3" required><br><br>
+        
+        <label for="choice4">Choice 4:</label>
+        <input type="text" id="choice4" name="choice4" required><br><br>
+        
+        <label for="answer">Answer:</label>
+        <input type="text" id="answer" name="answer" required><br><br>
+        
+        <button type="submit">Add Question</button>
+    </form>
+    <a href="{{ url_for('admin') }}" class="button">Back to Admin Panel</a>
+    <script>
+        // Ensure the input for new topic is correctly toggled on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            toggleNewTopicInput();
+        });
+    </script>
+{% endblock %}

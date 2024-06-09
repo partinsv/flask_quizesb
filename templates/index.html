@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Welcome to NPCprom</h1>
+    <p>Explore our quizzes and topics.</p>
+    <a href="{{ url_for('select_topic') }}" class="button">Start a Quiz</a>
+{% endblock %}
